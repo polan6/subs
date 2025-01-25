@@ -1,0 +1,21 @@
+.counter__content{
+	margin-top: 50px;
+	padding: 10px;
+	font-size: 70%;
+}
+
+.counter__table{
+	border: 1px solid #000;
+	border-collapse: collapse;
+}
+.counter__table th,td{
+	border: 1px solid #000;
+	width: 80px;
+	text-align: center;
+}
+.counter__table--name{
+	width: 160px!important;
+}
+.brandIcon{
+	font-size: 150%;
+}
