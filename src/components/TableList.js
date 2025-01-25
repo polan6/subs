@@ -1,7 +1,7 @@
 "use server";
 
 import { GoogleSpreadsheet } from "google-spreadsheet";
-import creds from '../../client_secret.json'
+// import creds from '../../client_secret.json'
 import { JWT } from 'google-auth-library';
 import './TableList.css'
 import ChannelList from "./ChannelList";
