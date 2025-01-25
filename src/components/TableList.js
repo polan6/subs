@@ -11,6 +11,11 @@ const SCOPES = [
   'https://www.googleapis.com/auth/drive.file',
 ];
 
+// const serviceAccountAuth = new JWT({
+//   email: creds.client_email,
+//   key: creds.private_key,
+//   scopes: SCOPES,
+// });
 const serviceAccountAuth = new JWT({
   email: creds.client_email,
   key: creds.private_key,
