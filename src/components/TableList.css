@@ -5,17 +5,37 @@
 }
 
 .counter__table{
-	border: 1px solid #000;
+	/* border: 1px solid #000; */
 	border-collapse: collapse;
 }
 .counter__table th,td{
 	border: 1px solid #000;
-	width: 80px;
 	text-align: center;
+	padding: 1px;
 }
+
+.counter__table tr:nth-child(even) td {
+  background: #eee;
+}
+.counter__table  td {
+  background: #fff;
+}
+.counter__table--sum td{
+  background: #fee !important;
+}
+.counter__table img{
+	vertical-align: middle;
+	max-width:2em;
+}
+
+.counter__table--image{
+	border: none!important;
+}
+
 .counter__table--name{
 	width: 160px!important;
 }
-.brandIcon{
-	font-size: 150%;
+.counter__table--number{
+	width: 80px;
 }
+

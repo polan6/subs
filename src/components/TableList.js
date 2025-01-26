@@ -47,7 +47,7 @@ export async function TableList(){
 		<div className="counter__content">
 			<ChannelList dataList={dataList[0]} title={"メインチャンネル"}></ChannelList>
 			<ChannelList dataList={dataList[1]} title={"グループチャンネル"}></ChannelList>
-			<ChannelList dataList={dataList[2]} title={"個人チャンネル"}></ChannelList>
+			{/* <ChannelList dataList={dataList[2]} title={"個人チャンネル"}></ChannelList> */}
 
 		</div>
 	)
