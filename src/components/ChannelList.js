@@ -7,7 +7,7 @@ import { faYoutube,faTwitter } from "@fortawesome/free-brands-svg-icons";
 const ChannelList = ({dataList,title}) => {
 	const [sortedData,setSortedData]=useState(dataList)
 	const tableSort=(index)=>{
-		setSortedData([...sortedData.sort((a,b)=>b[index]-a[index])])
+		setSortedData([ ...sortedData.sort((a,b)=>b[index]-a[index])])
 	}
 	return (
 		<div>
