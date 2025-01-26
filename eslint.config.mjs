@@ -2,20 +2,18 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
 
+// __dirnameを設定
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// FlatCompatを初期化
 const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-// const eslintConfig = [...compat.extends("next/core-web-vitals")];
-const eslintConfig ={
-  parser: '@babel/eslint-parser',  // または他のパーサー
-  parserOptions: {
-    requireConfigFile: false, // 必要に応じて追加
-  },
-  extends: ["next/core-web-vitals"], // その他の設定
-};
-export default eslintConfig;
+// ESLint設定を手動で拡張
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals"),  // これで拡張した設定を取得
+];
 
+export default eslintConfig;
