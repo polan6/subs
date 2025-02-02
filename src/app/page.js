@@ -1,9 +1,9 @@
 "use server";
 import Image from "next/image";
 import styles from "./page.module.css";
-import Header from "@/components/Header";
-import { TableList } from "@/components/TableList";
-
+// import Header from "@/components/Header";
+// import { TableList } from "@/components/TableList";
+import { Serverside } from "@/components/Serverside";
 // export default function Home() {
 //   return (
 //     <div className={styles.page}>
@@ -99,10 +99,7 @@ import { TableList } from "@/components/TableList";
 //AIzaSyCHiW8J6zjMgbTUZAORRQzFBBfd3RDtYwQ
 export default async function Home() {
 	return (
-		<>
-			<Header/>
-			<TableList/>
-		</>
+		<Serverside/>
 	)
 }
 

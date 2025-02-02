@@ -1,12 +1,9 @@
-.counter__content{
-	margin-top: 50px;
-	padding: 10px;
-	font-size: 70%;
-}
+
 
 .counter__table{
 	/* border: 1px solid #000; */
 	border-collapse: collapse;
+	font-size: 70%;
 }
 .counter__table th,td{
 	border: 1px solid #000;
@@ -36,6 +33,10 @@
 	width: 160px!important;
 }
 .counter__table--number{
-	width: 80px;
+	width: 60px;
 }
-
+.counter__table--new{
+	font-size: 150%;
+	color: red;
+	
+}
