@@ -1,108 +1,98 @@
 "use server";
-import Image from "next/image";
-import styles from "./page.module.css";
-// import Header from "@/components/Header";
-// import { TableList } from "@/components/TableList";
-import { Serverside } from "@/components/Serverside";
-// export default function Home() {
-//   return (
-//     <div className={styles.page}>
-//       <main className={styles.main}>
-//         <Image
-//           className={styles.logo}
-//           src="/next.svg"
-//           alt="Next.js logo"
-//           width={180}
-//           height={38}
-//           priority
-//         />
-//         <ol>
-//           <li>
-//             Get started by editing <code>src/app/page.js</code>.
-//           </li>
-//           <li>Save and see your changes instantly.</li>
-//         </ol>
 
-//         <div className={styles.ctas}>
-//           <a
-//             className={styles.primary}
-//             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             <Image
-//               className={styles.logo}
-//               src="/vercel.svg"
-//               alt="Vercel logomark"
-//               width={20}
-//               height={20}
-//             />
-//             Deploy now
-//           </a>
-//           <a
-//             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className={styles.secondary}
-//           >
-//             Read our docs
-//           </a>
-//         </div>
-//       </main>
-//       <footer className={styles.footer}>
-//         <a
-//           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           <Image
-//             aria-hidden
-//             src="/file.svg"
-//             alt="File icon"
-//             width={16}
-//             height={16}
-//           />
-//           Learn
-//         </a>
-//         <a
-//           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           <Image
-//             aria-hidden
-//             src="/window.svg"
-//             alt="Window icon"
-//             width={16}
-//             height={16}
-//           />
-//           Examples
-//         </a>
-//         <a
-//           href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           <Image
-//             aria-hidden
-//             src="/globe.svg"
-//             alt="Globe icon"
-//             width={16}
-//             height={16}
-//           />
-//           Go to nextjs.org →
-//         </a>
-//       </footer>
-//     </div>
-//   );
-// }
-//AIzaSyCHiW8J6zjMgbTUZAORRQzFBBfd3RDtYwQ
-export default async function Home() {
-	return (
-		<Serverside/>
-	)
+import { GoogleSpreadsheet } from "google-spreadsheet";
+// import creds from '../../client_secret.json'
+import { JWT } from 'google-auth-library';
+
+import Selecter from "../components/Selecter";
+
+const SCOPES = [
+  'https://www.googleapis.com/auth/spreadsheets',
+  'https://www.googleapis.com/auth/drive.file',
+];
+
+// const serviceAccountAuth = new JWT({
+//   email: creds.client_email,
+//   key: creds.private_key,
+//   scopes: SCOPES,
+// });
+const serviceAccountAuth = new JWT({
+  email: process.env.NEXT_PUBLIC_CLIENT_EMAIL,
+  key: process.env.NEXT_PUBLIC_PRIVATE_KEY.replace(/\\n/g, "\n"),
+  scopes: SCOPES,
+});
+
+
+async function fetchData(id) {
+	const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws', serviceAccountAuth);
+	
+	// const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws');
+	// doc.useServiceAccountAuth(creds);
+	await doc.loadInfo();
+	const sheet = doc.sheetsByIndex[id];
+	const rows = await sheet.getRows()
+	let rowList=rows.map(v=>v._rawData)
+	rowList=[...rowList.sort((a,b)=>Number(b[4])-Number(a[4]))]
+	return rowList
+	console.log(rows[0].get('名前'))
+	// console.log(rows)
+	// for (let i = 0; i < 1000; i++) {
+	// 	console.log(i,rows[0].get('名前'))
+	// }
 }
-// export async function generateStaticParams(){
+async function fetchVideo() {
+	const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws', serviceAccountAuth);
+	
+	// const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws');
+	// doc.useServiceAccountAuth(creds);
+	await doc.loadInfo();
+	const sheet = doc.sheetsByIndex[3];
+	const rows = await sheet.getRows()
+	let rowList=rows.map(v=>v._rawData)
 
+	rowList=[...rowList.sort((a,b)=>Number(b[5])-Number(a[5]))]
+	return rowList
+	console.log(rows[0].get('名前'))
+	// console.log(rows)
+	// for (let i = 0; i < 1000; i++) {
+	// 	console.log(i,rows[0].get('名前'))
+	// }
+}
+
+export default async function Home(){
+	let dataList = await Promise.all([0, 1, 2].map(async (index) => await fetchData(index)));
+	let videoList=await fetchVideo()
+	const data={
+		channelList:dataList,
+		videoList:videoList
+	}
+	return (
+		<Selecter data={data}/>
+	)
+	// return (
+	// 	<div className="counter__content">
+	// 		<ChannelList dataList={dataList[0]} title={"メインチャンネル"}></ChannelList>
+	// 		<ChannelList dataList={dataList[1]} title={"グループチャンネル"}></ChannelList>
+	// 		{/* <ChannelList dataList={dataList[2]} title={"個人チャンネル"}></ChannelList> */}
+
+	// 	</div>
+	// )
+}
+
+
+
+
+// "use server";
+// import Image from "next/image";
+// import styles from "./page.module.css";
+// // import Header from "@/components/Header";
+// // import { TableList } from "@/components/TableList";
+// import { Serverside } from "@/components/Serverside";
+// export default async function Home() {
+// 	return (
+// 		<Serverside/>
+// 	)
 // }
+
+
 

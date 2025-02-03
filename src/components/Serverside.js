@@ -58,6 +58,7 @@ async function fetchVideo() {
 	// 	console.log(i,rows[0].get('名前'))
 	// }
 }
+
 export async function Serverside(){
 	let dataList = await Promise.all([0, 1, 2].map(async (index) => await fetchData(index)));
 	let videoList=await fetchVideo()
