@@ -14,14 +14,14 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "50人クラフトの統計",
-  description: "50人クラフト/ニート部のグループチャンネルの登録者数・再生回数・動画数を表示します。",
+  description: "このサイトは50人クラフト/ニート部のメインチャンネル・参加勢のグループチャンネルの登録者数・再生回数・動画数などを表示します。",
 };
 
 
 import { Analytics } from '@vercel/analytics/react';
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
 				<Analytics/>

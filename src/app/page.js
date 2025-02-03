@@ -102,4 +102,7 @@ export default async function Home() {
 		<Serverside/>
 	)
 }
+// export async function generateStaticParams(){
+
+// }
 
