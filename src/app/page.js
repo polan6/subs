@@ -1,3 +1,4 @@
+
 "use server";
 
 import { GoogleSpreadsheet } from "google-spreadsheet";
@@ -23,12 +24,7 @@ const serviceAccountAuth = new JWT({
 });
 
 
-async function fetchData(id) {
-	const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws', serviceAccountAuth);
-	
-	// const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws');
-	// doc.useServiceAccountAuth(creds);
-	await doc.loadInfo();
+async function fetchData(doc,id) {
 	const sheet = doc.sheetsByIndex[id];
 	const rows = await sheet.getRows()
 	let rowList=rows.map(v=>v._rawData)
@@ -40,12 +36,7 @@ async function fetchData(id) {
 	// 	console.log(i,rows[0].get('名前'))
 	// }
 }
-async function fetchVideo() {
-	const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws', serviceAccountAuth);
-	
-	// const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws');
-	// doc.useServiceAccountAuth(creds);
-	await doc.loadInfo();
+async function fetchVideo(doc) {
 	const sheet = doc.sheetsByIndex[3];
 	const rows = await sheet.getRows()
 	let rowList=rows.map(v=>v._rawData)
@@ -58,14 +49,19 @@ async function fetchVideo() {
 	// 	console.log(i,rows[0].get('名前'))
 	// }
 }
-
-export default async function Home(){
-	let dataList = await Promise.all([0, 1, 2].map(async (index) => await fetchData(index)));
-	let videoList=await fetchVideo()
+async function fetchSheet(){
+	const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws', serviceAccountAuth);
+	await doc.loadInfo();
+	let dataList = await Promise.all([0, 1, 2].map(async (index) => await fetchData(doc,index)));
+	let videoList=await fetchVideo(doc)
 	const data={
 		channelList:dataList,
 		videoList:videoList
 	}
+	return data
+}
+export default async function Home(){
+	const data=await fetchSheet()
 	return (
 		<Selecter data={data}/>
 	)
@@ -82,17 +78,18 @@ export default async function Home(){
 
 
 
+
+
+
+
 // "use server";
 // import Image from "next/image";
 // import styles from "./page.module.css";
 // // import Header from "@/components/Header";
 // // import { TableList } from "@/components/TableList";
-// import { Serverside } from "@/components/Serverside";
+// import { Index } from "@/pages/Index";
 // export default async function Home() {
 // 	return (
-// 		<Serverside/>
+// 		<Index/>
 // 	)
 // }
-
-
-
