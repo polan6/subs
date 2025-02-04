@@ -18,13 +18,13 @@ export const metadata = {
 };
 
 
-// import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react';
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
-				{/* <Analytics/> */}
+				<Analytics/>
       </body>
     </html>
   );

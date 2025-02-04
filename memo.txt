@@ -1,2 +1,6 @@
-使用
+参考
 https://zenn.dev/tasugi/articles/d05c445bc79f09
+
+SSRができない
+export const dynamic = 'force-dynamic'
+https://nextjs.org/docs/app/building-your-application/data-fetching/fetching

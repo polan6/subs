@@ -8,3 +8,6 @@
 .counter__text{
 	margin-top: 20px;
 }
+.counter__text svg{
+	color:red
+}
