@@ -9,7 +9,6 @@ const ChannelList = ({channelList,title}) => {
 	const [sortedData,setSortedData]=useState(channelList)
 	const tableSort=(index,isReverse=false)=>{
 		if(isReverse){
-			console.log(1)
 			setSortedData([ ...sortedData.sort((a,b)=>{
 				return Number(a[index])-Number(b[index])
 			})])

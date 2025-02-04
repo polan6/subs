@@ -1,8 +1,7 @@
-// "use server";
+import { NextResponse } from 'next/server';
 
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { JWT } from 'google-auth-library';
-import Selecter from "../components/Selecter";
 
 const SCOPES = [
   'https://www.googleapis.com/auth/spreadsheets',
@@ -54,43 +53,9 @@ async function fetchSheet(){
 	return data
 }
 
-// import { headers } from 'next/headers';
-
-export default async function Home(){
-	// const headersData = headers();
-	// const protocol = headersData.get('x-forwarded-proto') || 'http';
-	// const host = headersData.get('host');
-	// const apiBase = `${protocol}://${host}`;
-	// const ENDPOINT = `${apiBase}/api/dara`;
 
 
-	// const data = await fetch(ENDPOINT).then((res) => res.json());
-	const data=await fetchSheet()
-
-	return (
-		<Selecter data={data}/>
-	)
-	// return (
-	// 	<div className="counter__content">
-	// 		<ChannelList dataList={dataList[0]} title={"メインチャンネル"}></ChannelList>
-	// 		<ChannelList dataList={dataList[1]} title={"グループチャンネル"}></ChannelList>
-	// 		{/* <ChannelList dataList={dataList[2]} title={"個人チャンネル"}></ChannelList> */}
-
-	// 	</div>
-	// )
+export async function GET() {
+  const data = await fetchSheet()
+  return NextResponse.json(data)
 }
-
-export const dynamic = 'force-dynamic'
-
-
-// "use server";
-// import Image from "next/image";
-// import styles from "./page.module.css";
-// // import Header from "@/components/Header";
-// // import { TableList } from "@/components/TableList";
-// import { Index } from "@/pages/Index";
-// export default async function Home() {
-// 	return (
-// 		<Index/>
-// 	)
-// }
