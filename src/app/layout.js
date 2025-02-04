@@ -22,6 +22,9 @@ import { Analytics } from '@vercel/analytics/react';
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
+			<head>
+				<meta name="google-site-verification" content="yYTYpswWG10laX1mhOoVHZYI1jbcTfKZb8VvNjMsRlc" />
+			</head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
 				<Analytics/>
