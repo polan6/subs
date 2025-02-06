@@ -17,8 +17,8 @@ const serviceAccountAuth = new JWT({
 });
 
 
-async function fetchData(doc,id) {
-	const sheet = doc.sheetsByIndex[id];
+async function fetchData(doc,index) {
+	const sheet = doc.sheetsByIndex[index];
 	const rows = await sheet.getRows()
 	let rowList=rows.map(v=>v._rawData)
 	rowList=[...rowList.sort((a,b)=>Number(b[4])-Number(a[4]))]
@@ -29,12 +29,12 @@ async function fetchData(doc,id) {
 	// 	console.log(i,rows[0].get('名前'))
 	// }
 }
-async function fetchVideo(doc) {
-	const sheet = doc.sheetsByIndex[3];
+async function fetchVideo(doc,index) {
+	const sheet = doc.sheetsByIndex[3+index];
 	const rows = await sheet.getRows()
 	let rowList=rows.map(v=>v._rawData)
 
-	rowList=[...rowList.sort((a,b)=>Number(b[5])-Number(a[5]))]
+	//rowList=[...rowList.sort((a,b)=>Number(b[5])-Number(a[5]))]
 	return rowList
 	console.log(rows[0].get('名前'))
 	// console.log(rows)
@@ -46,7 +46,18 @@ async function fetchSheet(){
 	const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws', serviceAccountAuth);
 	await doc.loadInfo();
 	let dataList = await Promise.all([0, 1, 2].map(async (index) => await fetchData(doc,index)));
-	let videoList=await fetchVideo(doc)
+	//videolist
+	const videoListIndex=[]
+	for (let i = 0; i < 24; i++) {
+		videoListIndex.push(i)
+	}
+	const videoListArray=await Promise.all(videoListIndex.map(async (index) => await fetchVideo(doc,index)));
+	let videoList=[]
+	for (let i = 0; i < 24; i++) {
+		videoList=[...videoList,...videoListArray[i]]
+	}
+	videoList=[...videoList.sort((a,b)=>Number(b[5])-Number(a[5]))]
+	
 	const data={
 		channelList:dataList,
 		videoList:videoList

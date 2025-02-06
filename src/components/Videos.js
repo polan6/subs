@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import './Videos.css'
+import { v4 as uuid } from "uuid";
 function getTimeDiff(_time){
 	try {
 		const time=Number(_time)
@@ -37,7 +38,7 @@ const Videos = ({videoList}) => {
 		<div className='video__content'>
 			{videoList.map(video=>{
 				return(
-					<div className='video' key={video[6]}>
+					<div className='video' key={uuid()}>
        			<div className="video__thumbnail">
 							<a href={`https://www.youtube.com/watch?v=${video[6]}`}>
           			<img src={video[3]} alt="" />

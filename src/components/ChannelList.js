@@ -55,7 +55,7 @@ const ChannelList = ({channelList,title}) => {
 						<tr key={data[0]}>
 						<th className="counter__table--image counter__table--new">
 						{/* {Number(data[6])-Number(data[7])} */}
-							{Number(data[6])>Number(data[7])?<FontAwesomeIcon icon={faCircleExclamation} />:<></>}
+							{Number(data[6])>Number(data[30])?<FontAwesomeIcon icon={faCircleExclamation} />:<></>}
 						</th>
 						<td>
 							<a href={`https://www.youtube.com/channel/${data[3]}`}>
@@ -68,7 +68,7 @@ const ChannelList = ({channelList,title}) => {
 						<td>{new Intl.NumberFormat('ja-JP').format(data[6])}</td>
 						{title=='個人チャンネル'?<>
 						<td scope='col' onClick={()=>tableSort(8,true)} className="cursor__pointer counter__table--number">
-							{Number.isInteger(Number(data[8]))?`${data[8]}位`:"--"}
+							{Number.isInteger(Number(data[31]))?`${data[31]}位`:"--"}
 						</td>
 						</>:<></>}
 					</tr>)
