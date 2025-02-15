@@ -11,10 +11,10 @@ const Stats = ({channelList}) => {
 		<div className="counter__content">
 			<ChannelList channelList={channelList[0]} title={"メインチャンネル"}/>
 			<ChannelList channelList={channelList[1]} title={"グループチャンネル"}/>
-			{/* <ChannelList channelList={channelList[2]} title={"個人チャンネル"}/> */}
+			<ChannelList channelList={channelList[2]} title={"個人チャンネル"}/>
 			<div className='counter__text'>
 				<p>
-				このサイトは50人クラフト/ニート部のメインチャンネル・参加勢のグループチャンネルの登録者数・再生回数・動画数などを表示します。
+				このサイトは50人クラフト/ニート部のメインチャンネル・参加勢のグループチャンネル・参加勢の個人チャンネルの登録者数・再生回数・動画数などを表示します。また、新着動画の一覧も見ることができます。
 				</p>
 				<p>
 				<FontAwesomeIcon icon={faCircleExclamation} />マークがついているチャンネルは新着動画があるチャンネルです。

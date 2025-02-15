@@ -40,24 +40,29 @@ const Videos = ({videoList}) => {
 				return(
 					<div className='video' key={uuid()}>
        			<div className="video__thumbnail">
-							<a href={`https://www.youtube.com/watch?v=${video[6]}`}>
+							<a href={`https://www.youtube.com/watch?v=${video[6]}`}
+							target="_blank" rel="noopener noreferrer">
           			<img src={video[3]} alt="" />
 							</a>
         		</div>
 						<div className='video__details'>
 							<div className='video__author'>
-								<a href={`https://www.youtube.com/channel/${video[2]}`}>
+								<a href={`https://www.youtube.com/channel/${video[2]}`}
+								target="_blank" rel="noopener noreferrer">
 									<img src={video[1]} alt="" />
 								</a>
 							</div>
 							<div className="video__title">
-								<a href={`https://www.youtube.com/watch?v=${video[6]}`}>
+								<a href={`https://www.youtube.com/watch?v=${video[6]}`}
+								target="_blank" rel="noopener noreferrer">
 									<h3>
 										{video[4]}
 									</h3>
                 </a>
 
-                <a href={`https://www.youtube.com/channel/${video[2]}`} className='video__channelName'>
+                <a href={`https://www.youtube.com/channel/${video[2]}`}
+								className='video__channelName'
+								target="_blank" rel="noopener noreferrer">
                   {video[0]}
                 </a>
                 <span>{getTimeDiff(video[5])}</span>

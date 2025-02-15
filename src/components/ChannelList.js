@@ -29,8 +29,7 @@ const ChannelList = ({channelList,title}) => {
 				<th scope='col' className="counter__table--image"></th>
 				<th scope='col' className="counter__table--name">名前</th>
 				<th scope='col' onClick={()=>tableSort(4)} className="cursor__pointer counter__table--number">
-					登録者数
-				<FontAwesomeIcon icon={faCaretDown} />
+					登録者数<FontAwesomeIcon icon={faCaretDown} />
 				</th>
 				<th scope='col' onClick={()=>tableSort(5)} className="cursor__pointer counter__table--number">
 					視聴回数<FontAwesomeIcon icon={faCaretDown} />
@@ -54,13 +53,17 @@ const ChannelList = ({channelList,title}) => {
 						
 						<tr key={data[0]}>
 						<th className="counter__table--image counter__table--new">
-						{/* {Number(data[6])-Number(data[7])} */}
 							{Number(data[6])>Number(data[30])?<FontAwesomeIcon icon={faCircleExclamation} />:<></>}
 						</th>
 						<td>
-							<a href={`https://www.youtube.com/channel/${data[3]}`}>
+							{data[3].startsWith('UC')?
+							<a href={`https://www.youtube.com/channel/${data[3]}`}
+							target="_blank" rel="noopener noreferrer">
 								<img src={data[1]} alt="アイコン"></img>
 							</a>
+							:
+							<img src={data[1]} alt="アイコン"></img>
+							}
 						</td>
 						<td>{data[0]}</td>
 						<td>{new Intl.NumberFormat('ja-JP').format(data[4])}</td>
