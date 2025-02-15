@@ -38,7 +38,7 @@ const ChannelList = ({channelList,title}) => {
 					動画数<FontAwesomeIcon icon={faCaretDown} />
 				</th>
 				{title=='個人チャンネル'?<>
-					<th scope='col' onClick={()=>tableSort(8,true)} className="cursor__pointer counter__table--number">
+					<th scope='col' onClick={()=>tableSort(31,true)} className="cursor__pointer counter__table--number">
 					投票<FontAwesomeIcon icon={faCaretUp} />
 				</th>
 				</>:<></>}
@@ -70,7 +70,7 @@ const ChannelList = ({channelList,title}) => {
 						<td>{new Intl.NumberFormat('ja-JP').format(data[5])}</td>
 						<td>{new Intl.NumberFormat('ja-JP').format(data[6])}</td>
 						{title=='個人チャンネル'?<>
-						<td scope='col' onClick={()=>tableSort(8,true)} className="cursor__pointer counter__table--number">
+						<td scope='col'>
 							{Number.isInteger(Number(data[31]))?`${data[31]}位`:"--"}
 						</td>
 						</>:<></>}
