@@ -30,28 +30,26 @@ async function fetchData(doc,index) {
 	// }
 }
 async function fetchVideo(doc,index) {
-	const sheet = doc.sheetsByIndex[3+index];
-	const rows = await sheet.getRows()
-	let rowList=rows.map(v=>v._rawData)
+	try {
+		const sheet = doc.sheetsByIndex[3+index];
+		const rows = await sheet.getRows()
+		let rowList=rows.map(v=>v._rawData)
+		return rowList
+	} catch (error) {
+		return []
+	}
 
-	//rowList=[...rowList.sort((a,b)=>Number(b[5])-Number(a[5]))]
-	return rowList
-	console.log(rows[0].get('名前'))
-	// console.log(rows)
-	// for (let i = 0; i < 1000; i++) {
-	// 	console.log(i,rows[0].get('名前'))
-	// }
 }
 async function fetchSheet(){
 	const doc = new GoogleSpreadsheet('1TAaXJgYxMZTNC5W0rOap4i50_NOq7JW-BoQh-hqCcws', serviceAccountAuth);
 	await doc.loadInfo();
 	let dataList = await Promise.all([0, 1, 2].map(async (index) => await fetchData(doc,index)));
 	//videolist
-	const videoListIndex=[]
+	const videoSheetIndex=[]
 	for (let i = 0; i < 24; i++) {
-		videoListIndex.push(i)
+		videoSheetIndex.push(i)
 	}
-	const videoListArray=await Promise.all(videoListIndex.map(async (index) => await fetchVideo(doc,index)));
+	const videoListArray=await Promise.all(videoSheetIndex.map(async (index) => await fetchVideo(doc,index)));
 	let videoList=[]
 	for (let i = 0; i < 24; i++) {
 		videoList=[...videoList,...videoListArray[i]]
@@ -68,40 +66,11 @@ async function fetchSheet(){
 // import { headers } from 'next/headers';
 
 export default async function Home(){
-	// const headersData = headers();
-	// const protocol = headersData.get('x-forwarded-proto') || 'http';
-	// const host = headersData.get('host');
-	// const apiBase = `${protocol}://${host}`;
-	// const ENDPOINT = `${apiBase}/api/dara`;
-
-
-	// const data = await fetch(ENDPOINT).then((res) => res.json());
 	const data=await fetchSheet()
 
 	return (
 		<Selecter data={data}/>
 	)
-	// return (
-	// 	<div className="counter__content">
-	// 		<ChannelList dataList={dataList[0]} title={"メインチャンネル"}></ChannelList>
-	// 		<ChannelList dataList={dataList[1]} title={"グループチャンネル"}></ChannelList>
-	// 		{/* <ChannelList dataList={dataList[2]} title={"個人チャンネル"}></ChannelList> */}
-
-	// 	</div>
-	// )
 }
 
 export const dynamic = 'force-dynamic'
-
-
-// "use server";
-// import Image from "next/image";
-// import styles from "./page.module.css";
-// // import Header from "@/components/Header";
-// // import { TableList } from "@/components/TableList";
-// import { Index } from "@/pages/Index";
-// export default async function Home() {
-// 	return (
-// 		<Index/>
-// 	)
-// }
