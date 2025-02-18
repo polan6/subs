@@ -19,6 +19,11 @@ const Stats = ({channelList}) => {
 				<p>
 				<FontAwesomeIcon icon={faCircleExclamation} />マークがついているチャンネルは新着動画があるチャンネルです。
 				</p>
+				<p>
+					作者Twitter: <a href='https://x.com/Polan6166'
+					target="_blank" rel="noopener noreferrer"
+					>https://x.com/Polan6166</a>
+				</p>
 			
 			
 			</div>
