@@ -33,7 +33,6 @@ function getTimeDiff(_time){
 	}
 }
 const Videos = ({videoList}) => {
-	console.log(videoList)
 	return (
 		<div className='video__content'>
 			{videoList.map(video=>{

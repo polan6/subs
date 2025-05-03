@@ -5,7 +5,7 @@ import Header from "@/assets/Header";
 import Footer from "@/assets/Footer";
 import Stats from './Stats';
 import Videos from './Videos';
-// サーバーサイドからルーターにデータを渡す
+
 const Selecter = ({data}) => {
 	const [page,setPage]=useState(0)
 	if(page==0){

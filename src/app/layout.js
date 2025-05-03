@@ -17,8 +17,8 @@ export const metadata = {
   description: "このサイトは50人クラフト/ニート部のメインチャンネル・参加勢のグループチャンネル・参加勢の個人チャンネルの登録者数・再生回数・動画数などを表示します。また、新着動画の一覧も見ることができます。",
 };
 
-
 import { Analytics } from '@vercel/analytics/react';
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
