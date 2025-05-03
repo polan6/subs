@@ -15,7 +15,6 @@ const serviceAccountAuth = new JWT({
 	scopes: SCOPES,
 });
 
-
 async function fetchData(doc,index) {
 	const sheet = doc.sheetsByIndex[index];
 	const rows = await sheet.getRows()
